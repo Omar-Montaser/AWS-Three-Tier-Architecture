@@ -1,15 +1,55 @@
-# AWS-Capstone-Project
-AWS Fundamentals Specialization Capstone project. 
-Scenario: You have a web application that accepts requests from the internet. Clients can send requests to query for data. When a request comes in, the web application queries a MySQL database and returns the data to the client.
+# AWS Capstone Project
 
-Instructions: Design a three-tier architecture that follows AWS best practices by using services such as Amazon Virtual Private Cloud (Amazon VPC), Amazon Elastic Compute Cloud (Amazon EC2), Amazon Relational Database Service (Amazon RDS) with high availability, and Elastic Load Balancing (ELB). Create an architecture diagram that lays out your design, including the networking layer, compute layer, database layer, and anything else that’s needed to accurately depict the architecture. Write a few paragraphs that explain why you chose the AWS services that you used and how they would support the solution for the given scenario. Your explanation must describe how traffic flows through the different AWS components—from the client to the backend database, and back to the client.
+## Overview
+This project is the capstone for the AWS Fundamentals Specialization. The goal is to design a **highly available, scalable, and secure** three-tier architecture for a web application that serves client requests over the internet.
 
-The architecture uses Amazon VPC to isolate resources securely and distribute them across multiple availability zones (AZs) for high availability. 
-Application Load Balancer (ALB) distributes incoming traffic evenly across EC2 instances in public & private subnets managed by Auto Scaling, ensuring scalability and fault tolerance. 
-Amazon RDS is used for a managed MySQL database with Multi-AZ deployment, providing automatic failover and high availability. 
-IAM secures access, and CloudWatch monitors performance and health.
+## Scenario
+The web application processes incoming client requests, queries a **MySQL database**, and returns the requested data. To meet AWS best practices, the solution must leverage **Amazon Virtual Private Cloud (VPC)**, **Amazon Elastic Compute Cloud (EC2)**, **Amazon Relational Database Service (RDS)**, and **Elastic Load Balancing (ELB)** while ensuring high availability, security, and performance.
 
-Traffic Flow 
-1. Client to Application: Clients send requests to the ALB in the public subnet, which forwards them to healthy EC2 instances in private subnets.
-2. Application to Database: EC2 instances query the RDS instance in private subnets to fetch or update data. The RDS instance’s Multi-AZ feature ensures availability during failover.
-3. Response to Client: EC2 instances process the data and return the response to the client via the ALB.
+## Architecture Design
+The system is built using a **three-tier architecture**, which consists of:
+
+1. **Networking Layer**  
+   - Amazon **VPC** isolates resources securely.
+   - **Public and private subnets** are distributed across multiple **Availability Zones (AZs)** for redundancy.
+   - **Security Groups and IAM roles** enforce strict access control.
+
+2. **Compute Layer**  
+   - **Auto Scaling EC2 instances** run the application in private subnets.
+   - **Application Load Balancer (ALB)** distributes incoming traffic efficiently across multiple EC2 instances.
+   - EC2 instances are managed via an **Auto Scaling Group** for elasticity and fault tolerance.
+
+3. **Database Layer**  
+   - **Amazon RDS (MySQL) with Multi-AZ deployment** ensures database availability and automatic failover.
+   - **Private subnet** restricts direct internet access to the database.
+   - **Amazon RDS security groups** control inbound traffic.
+
+## Traffic Flow
+
+1. **Client to Application**  
+   - Clients send requests to the **ALB** in the public subnet.  
+   - The ALB forwards requests to the **EC2 instances** in private subnets.
+
+2. **Application to Database**  
+   - The EC2 instances process requests and query the **RDS instance** for data.  
+   - The **Multi-AZ RDS deployment** ensures availability during failover scenarios.
+
+3. **Response to Client**  
+   - The EC2 instances process the data and return the response to the client through the ALB.
+
+## AWS Services Used
+
+- **Amazon VPC** – Provides network isolation and secure communication.
+- **Amazon EC2** – Hosts the web application with scalable compute resources.
+- **Elastic Load Balancer (ALB)** – Distributes incoming traffic across EC2 instances.
+- **Amazon RDS (MySQL)** – Managed relational database with high availability.
+- **IAM Roles & Security Groups** – Control access and permissions.
+- **Amazon CloudWatch** – Monitors system performance and health.
+
+
+## Future Enhancements
+
+- **Implement AWS Lambda** for serverless processing of certain tasks.
+- **Use Amazon S3** for static file storage and CloudFront for CDN delivery.
+- **Enable AWS WAF** for enhanced web security.
+- **Implement AWS Secrets Manager** to manage database credentials securely.
