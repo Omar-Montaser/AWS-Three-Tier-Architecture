@@ -1,7 +1,7 @@
 # AWS Capstone Project
 
 ## Overview
-This project is the capstone for the AWS Fundamentals Specialization. The goal is to design a **highly available, scalable, and secure** three-tier architecture for a web application that serves client requests over the internet.
+The goal is to design a **highly available, scalable, and secure** three-tier architecture for a web application that serves client requests over the internet.
 
 ## Scenario
 The web application processes incoming client requests, queries a **MySQL database**, and returns the requested data. To meet AWS best practices, the solution must leverage **Amazon Virtual Private Cloud (VPC)**, **Amazon Elastic Compute Cloud (EC2)**, **Amazon Relational Database Service (RDS)**, and **Elastic Load Balancing (ELB)** while ensuring high availability, security, and performance.
